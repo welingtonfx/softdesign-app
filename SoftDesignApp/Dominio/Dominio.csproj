@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -9,8 +9,11 @@
 
   <ItemGroup>
     <Folder Include="Dominio\" />
-    <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
+    <Folder Include="Interface\Model\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.11.2" />
   </ItemGroup>
 
 </Project>

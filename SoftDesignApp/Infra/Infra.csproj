@@ -8,12 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Comum\" />
-    <Folder Include="Repositorio\" />
+    <PackageReference Include="MongoDB.Driver" Version="2.11.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.11.2" />
+    <ProjectReference Include="..\Dominio\Dominio.csproj" />
   </ItemGroup>
 
 </Project>

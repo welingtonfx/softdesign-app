@@ -1,8 +1,15 @@
+using Aplicacao;
+using Dominio.Interface.Aplicacao;
+using Dominio.Interface.Infra;
+using Dominio.Interface.Infra.Repositorio;
+using Infra.Comum;
+using Infra.Repositorio;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using System;
 
@@ -49,6 +56,11 @@ namespace API
             services.AddSwaggerGenNewtonsoftSupport();
 
             services.AddSingleton<IConfiguration>(Configuration);
+
+            services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
+            services.AddSingleton<IDatabaseSettings>(f => f.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+            services.AddScoped<IServicoAplicacaoApplication, ServicoAplicacaoApplication>();
+            services.AddScoped<IRepositorioApplication, RepositorioApplication>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
