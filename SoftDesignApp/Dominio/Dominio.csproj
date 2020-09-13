@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Dominio\" />
-    <Folder Include="Interface\Model\" />
   </ItemGroup>
 
   <ItemGroup>

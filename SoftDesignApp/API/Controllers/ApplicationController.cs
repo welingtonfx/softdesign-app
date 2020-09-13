@@ -21,7 +21,7 @@ namespace API.Controllers
         {
             try
             {
-                var result = await this._servicoAplicacaoApplication.Get();
+                var result = await _servicoAplicacaoApplication.Get();
 
                 return Ok(result);
             }
@@ -36,7 +36,7 @@ namespace API.Controllers
         {
             try
             {
-                var result = await this._servicoAplicacaoApplication.GetById(id);
+                var result = await _servicoAplicacaoApplication.GetById(id);
 
                 return Ok(result);
             }
@@ -51,7 +51,7 @@ namespace API.Controllers
         {
             try
             {
-                var result = await this._servicoAplicacaoApplication.Insert(model);
+                var result = await _servicoAplicacaoApplication.Insert(model);
 
                 return Ok(result);
             }
@@ -66,9 +66,9 @@ namespace API.Controllers
         {
             try
             {
-                await this._servicoAplicacaoApplication.Update(id, model);
+                var result = await _servicoAplicacaoApplication.Update(id, model);
 
-                return Ok();
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -81,7 +81,7 @@ namespace API.Controllers
         {
             try
             {
-                await this._servicoAplicacaoApplication.Remove(model);
+                await _servicoAplicacaoApplication.Remove(model);
 
                 return Ok();
             }
@@ -96,7 +96,7 @@ namespace API.Controllers
         {
             try
             {
-                await this._servicoAplicacaoApplication.Remove(id);
+                await _servicoAplicacaoApplication.Remove(id);
 
                 return Ok();
             }

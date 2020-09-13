@@ -1,16 +1,9 @@
-﻿using Dominio.Model;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Dominio.Interface.Repositorio;
+using Dominio.Model;
 
 namespace Dominio.Interface.Infra.Repositorio
 {
-    public interface IRepositorioApplication
+    public interface IRepositorioApplication : IRepositorioBase<ApplicationModel>
     {
-        Task<IList<ApplicationModel>> Get();
-        Task<ApplicationModel> GetById(string id);
-        Task<ApplicationModel> Insert(ApplicationModel application);
-        Task Update(string id, ApplicationModel application);
-        Task Remove(ApplicationModel application);
-        Task Remove(string id);
     }
 }

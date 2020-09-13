@@ -35,9 +35,10 @@ namespace Aplicacao
             return (ApplicationViewModel)retorno;
         }
 
-        public async Task Update(string id, ApplicationModel application)
+        public async Task<ApplicationViewModel> Update(string id, ApplicationModel application)
         {
-            await _repositorioApplication.Update(id, application);
+            var retorno = await _repositorioApplication.Update(id, application);
+            return (ApplicationViewModel)retorno;
         }
 
         public async Task Remove(ApplicationModel application)

@@ -1,9 +1,10 @@
-﻿using MongoDB.Bson;
+﻿using Dominio.Interface.Model;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Dominio.Model
 {
-    public class ApplicationModel
+    public class ApplicationModel : IIdentifier
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
