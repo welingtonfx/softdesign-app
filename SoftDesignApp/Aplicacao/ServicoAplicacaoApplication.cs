@@ -13,7 +13,7 @@ namespace Aplicacao
         private readonly IRepositorioApplication _repositorioApplication;
         public ServicoAplicacaoApplication(IRepositorioApplication repositorioApplication)
         {
-            repositorioApplication = _repositorioApplication;
+            _repositorioApplication = repositorioApplication;
         }
 
         public async Task<IList<ApplicationViewModel>> Get()
