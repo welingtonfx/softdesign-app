@@ -8,7 +8,7 @@ namespace Dominio.Validation.ApplicationModel
 {
     public class UrlIsRequired
     {
-        public IValidator<ApplicationViewModel> Validate()
+        public IValidator<ApplicationViewModel> GetRules()
         {
             var validator = new InlineValidator<ApplicationViewModel>();
 

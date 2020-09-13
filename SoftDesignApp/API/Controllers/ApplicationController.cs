@@ -1,7 +1,8 @@
 ﻿using Dominio.Interface.Aplicacao;
-using Dominio.Model;
 using Dominio.ViewModel;
+using FluentValidation;
 using Infra.Comum;
+using Infra.Extension;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet("{id:length(24)}")]
+        [HttpGet("get/{id:length(24)}")]
         public async Task<ActionResult<IList<ApplicationViewModel>>> GetById(string id)
         {
             try
@@ -56,13 +57,13 @@ namespace API.Controllers
 
                 return Ok(result);
             }
-            catch (Exception ex)
+            catch (ValidationException ex)
             {
-                return Conflict(ex);
+                return Conflict(ex.GetErrorMessages());
             }
         }
 
-        [HttpPatch("{id:length(24)}")]
+        [HttpPatch("update/{id:length(24)}")]
         public async Task<ActionResult<ApplicationViewModel>> Update(string id, ApplicationViewModel model)
         {
             try
@@ -71,9 +72,9 @@ namespace API.Controllers
 
                 return Ok(result);
             }
-            catch (Exception ex)
+            catch (ValidationException ex)
             {
-                return Conflict(ex);
+                return Conflict(ex.GetErrorMessages());
             }
         }
 
@@ -86,13 +87,13 @@ namespace API.Controllers
 
                 return Ok();
             }
-            catch (Exception ex)
+            catch (ValidationException ex)
             {
-                return Conflict(ex);
+                return Conflict(ex.GetErrorMessages());
             }
         }
 
-        [HttpDelete("{id:length(24)}")]
+        [HttpDelete("delete/{id:length(24)}")]
         public async Task<ActionResult<ApplicationViewModel>> Delete(string id)
         {
             try

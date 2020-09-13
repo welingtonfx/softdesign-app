@@ -1,7 +1,9 @@
 using Aplicacao;
+using Dominio.Interface;
 using Dominio.Interface.Aplicacao;
 using Dominio.Interface.Infra;
 using Dominio.Interface.Infra.Repositorio;
+using Dominio.Validation.ApplicationModel;
 using Infra.Comum;
 using Infra.Repositorio;
 using Microsoft.AspNetCore.Builder;
@@ -61,6 +63,7 @@ namespace API
             services.AddSingleton<IDatabaseSettings>(f => f.GetRequiredService<IOptions<DatabaseSettings>>().Value);
             services.AddScoped<IServicoAplicacaoApplication, ServicoAplicacaoApplication>();
             services.AddScoped<IRepositorioApplication, RepositorioApplication>();
+            services.AddScoped<IApplicationValidator, ApplicationValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

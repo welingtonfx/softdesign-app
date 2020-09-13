@@ -5,15 +5,20 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using Dominio.ViewModel;
+using Dominio.Interface;
 
 namespace Aplicacao
 {
     public class ServicoAplicacaoApplication : IServicoAplicacaoApplication
     {
         private readonly IRepositorioApplication _repositorioApplication;
-        public ServicoAplicacaoApplication(IRepositorioApplication repositorioApplication)
+        private readonly IApplicationValidator _applicationValidator;
+
+        public ServicoAplicacaoApplication(IRepositorioApplication repositorioApplication,
+            IApplicationValidator applicationValidator)
         {
             _repositorioApplication = repositorioApplication;
+            _applicationValidator = applicationValidator;
         }
 
         public async Task<IList<ApplicationViewModel>> Get()
@@ -31,18 +36,24 @@ namespace Aplicacao
 
         public async Task<ApplicationViewModel> Insert(ApplicationViewModel application)
         {
+            _applicationValidator.ValidateAndThrow(application);
+
             var retorno = await _repositorioApplication.Insert((ApplicationModel)application);
             return (ApplicationViewModel)retorno;
         }
 
         public async Task<ApplicationViewModel> Update(string id, ApplicationViewModel application)
         {
+            _applicationValidator.ValidateAndThrow(application);
+
             var retorno = await _repositorioApplication.Update(id, (ApplicationModel)application);
             return (ApplicationViewModel)retorno;
         }
 
         public async Task Remove(ApplicationViewModel application)
         {
+            _applicationValidator.ValidateAndThrow(application);
+
             await _repositorioApplication.Remove((ApplicationModel)application);
         }
 
