@@ -29,21 +29,21 @@ namespace Aplicacao
             return (ApplicationViewModel)retorno;
         }
 
-        public async Task<ApplicationViewModel> Insert(ApplicationModel application)
+        public async Task<ApplicationViewModel> Insert(ApplicationViewModel application)
         {
-            var retorno = await _repositorioApplication.Insert(application);
+            var retorno = await _repositorioApplication.Insert((ApplicationModel)application);
             return (ApplicationViewModel)retorno;
         }
 
-        public async Task<ApplicationViewModel> Update(string id, ApplicationModel application)
+        public async Task<ApplicationViewModel> Update(string id, ApplicationViewModel application)
         {
-            var retorno = await _repositorioApplication.Update(id, application);
+            var retorno = await _repositorioApplication.Update(id, (ApplicationModel)application);
             return (ApplicationViewModel)retorno;
         }
 
-        public async Task Remove(ApplicationModel application)
+        public async Task Remove(ApplicationViewModel application)
         {
-            await _repositorioApplication.Remove(application);
+            await _repositorioApplication.Remove((ApplicationModel)application);
         }
 
         public async Task Remove(string id)

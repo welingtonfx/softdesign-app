@@ -24,10 +24,14 @@ namespace Infra.Comum
             return await _connection.Find(a => true).ToListAsync();
         }
 
-
         public async Task<TDocument> GetById(string id)
         {
-            return await _connection.Find(a => a.Id == id).FirstOrDefaultAsync();
+            var retorno = await _connection.Find(a => a.Id == id).FirstOrDefaultAsync();
+
+            if (retorno == null)
+                throw new SoftDesignException() { StatusCode = System.Net.HttpStatusCode.NotFound };
+
+            return retorno;
         }
 
         public async Task<TDocument> Insert(TDocument application)
@@ -38,7 +42,7 @@ namespace Infra.Comum
 
         public async Task<TDocument> Update(string id, TDocument application)
         {
-            return await _connection.FindOneAndReplaceAsync(f => f.Id == application.Id, application);
+            return await _connection.FindOneAndReplaceAsync(f => f.Id == id, application);
         }
 
         public async Task Remove(TDocument application)

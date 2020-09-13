@@ -9,9 +9,9 @@ namespace Dominio.Interface.Aplicacao
     {
         Task<IList<ApplicationViewModel>> Get();
         Task<ApplicationViewModel> GetById(string id);
-        Task<ApplicationViewModel> Insert(ApplicationModel application);
-        Task<ApplicationViewModel> Update(string id, ApplicationModel application);
-        Task Remove(ApplicationModel application);
+        Task<ApplicationViewModel> Insert(ApplicationViewModel application);
+        Task<ApplicationViewModel> Update(string id, ApplicationViewModel application);
+        Task Remove(ApplicationViewModel application);
         Task Remove(string id);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Dominio.Interface.Aplicacao;
 using Dominio.Model;
 using Dominio.ViewModel;
+using Infra.Comum;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpGet("get/{id}")]
+        [HttpGet("{id:length(24)}")]
         public async Task<ActionResult<IList<ApplicationViewModel>>> GetById(string id)
         {
             try
@@ -40,14 +41,14 @@ namespace API.Controllers
 
                 return Ok(result);
             }
-            catch (Exception ex)
+            catch (SoftDesignException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                return Conflict(ex);
+                return NotFound();
             }
         }
 
         [HttpPost("insert")]
-        public async Task<ActionResult<ApplicationViewModel>> Insert(ApplicationModel model)
+        public async Task<ActionResult<ApplicationViewModel>> Insert(ApplicationViewModel model)
         {
             try
             {
@@ -61,8 +62,8 @@ namespace API.Controllers
             }
         }
 
-        [HttpPatch("update/{id}")]
-        public async Task<ActionResult<ApplicationViewModel>> Update(string id, ApplicationModel model)
+        [HttpPatch("{id:length(24)}")]
+        public async Task<ActionResult<ApplicationViewModel>> Update(string id, ApplicationViewModel model)
         {
             try
             {
@@ -77,7 +78,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("delete")]
-        public async Task<ActionResult<ApplicationViewModel>> Delete(ApplicationModel model)
+        public async Task<ActionResult<ApplicationViewModel>> Delete(ApplicationViewModel model)
         {
             try
             {
@@ -91,7 +92,7 @@ namespace API.Controllers
             }
         }
 
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id:length(24)}")]
         public async Task<ActionResult<ApplicationViewModel>> Delete(string id)
         {
             try

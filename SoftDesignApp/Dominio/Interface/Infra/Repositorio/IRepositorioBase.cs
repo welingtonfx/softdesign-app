@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Dominio.Interface.Repositorio
+namespace Dominio.Interface.Infra.Repositorio
 {
     public interface IRepositorioBase<TDocument>
         where TDocument: IIdentifier

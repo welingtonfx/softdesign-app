@@ -1,5 +1,4 @@
-﻿using Dominio.Interface.Repositorio;
-using Dominio.Model;
+﻿using Dominio.Model;
 
 namespace Dominio.Interface.Infra.Repositorio
 {
