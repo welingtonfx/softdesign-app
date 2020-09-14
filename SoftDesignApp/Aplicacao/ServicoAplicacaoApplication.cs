@@ -21,10 +21,10 @@ namespace Aplicacao
             _applicationValidator = applicationValidator;
         }
 
-        public async Task<IList<ApplicationViewModel>> Get()
+        public async Task<IEnumerable<ApplicationViewModel>> Get()
         {
             var retorno = await _repositorioApplication.Get();
-            return retorno.Select(s => (ApplicationViewModel)s).ToList();
+            return retorno.Select(s => (ApplicationViewModel)s);
         }
 
 
@@ -38,7 +38,8 @@ namespace Aplicacao
         {
             _applicationValidator.ValidateAndThrow(application);
 
-            var retorno = await _repositorioApplication.Insert((ApplicationModel)application);
+            var aplicationModel = (ApplicationModel)application;
+            var retorno = await _repositorioApplication.Insert(aplicationModel);
             return (ApplicationViewModel)retorno;
         }
 

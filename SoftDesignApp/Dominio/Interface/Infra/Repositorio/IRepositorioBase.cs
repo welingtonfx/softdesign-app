@@ -7,7 +7,7 @@ namespace Dominio.Interface.Infra.Repositorio
     public interface IRepositorioBase<TDocument>
         where TDocument: IIdentifier
     {
-        Task<IList<TDocument>> Get();
+        Task<IEnumerable<TDocument>> Get();
         Task<TDocument> GetById(string id);
         Task<TDocument> Insert(TDocument application);
         Task<TDocument> Update(string id, TDocument application);

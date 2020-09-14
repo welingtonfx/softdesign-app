@@ -19,7 +19,7 @@ namespace Infra.Comum
             _connection = database.GetCollection<TDocument>(settings.ApplicationCollection);
         }
 
-        public async Task<IList<TDocument>> Get()
+        public async Task<IEnumerable<TDocument>> Get()
         {
             return await _connection.Find(a => true).ToListAsync();
         }

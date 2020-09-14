@@ -19,7 +19,7 @@ namespace API.Controllers
         }
 
         [HttpGet("get")]
-        public async Task<ActionResult<IList<ApplicationViewModel>>> Get()
+        public async Task<ActionResult<IEnumerable<ApplicationViewModel>>> Get()
         {
             try
             {
@@ -34,7 +34,7 @@ namespace API.Controllers
         }
 
         [HttpGet("get/{id:length(24)}")]
-        public async Task<ActionResult<IList<ApplicationViewModel>>> GetById(string id)
+        public async Task<ActionResult<ApplicationViewModel>> GetById(string id)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("delete")]
-        public async Task<ActionResult<ApplicationViewModel>> Delete(ApplicationViewModel model)
+        public async Task<ActionResult> Delete(ApplicationViewModel model)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("delete/{id:length(24)}")]
-        public async Task<ActionResult<ApplicationViewModel>> Delete(string id)
+        public async Task<ActionResult> Delete(string id)
         {
             try
             {
