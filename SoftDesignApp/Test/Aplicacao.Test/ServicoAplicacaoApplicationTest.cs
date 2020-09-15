@@ -4,7 +4,6 @@ using Dominio.Interface;
 using Dominio.Interface.Infra.Repositorio;
 using Dominio.Model;
 using Dominio.ViewModel;
-using Infra.Repositorio;
 using Moq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -57,39 +56,78 @@ namespace Test.Aplicacao.Test
             Assert.NotEmpty(retorno.Id);
         }
 
-        //[Fact]
-        //public async Task Insert_ShouldReturnSavedObject()
-        //{
-        //    var applicationViewModel = _fixture.Create<ApplicationViewModel>();
-        //    var application = (ApplicationModel)applicationViewModel;
+        [Fact]
+        public void Insert_ShouldReturnSavedObject()
+        {
+            var applicationViewModel = _fixture.Create<ApplicationViewModel>();
+            var application = _fixture.Create<ApplicationModel>();
 
-        //    _repositorioApplicationMock.Setup(p => p.Insert(application)).ReturnsAsync(application);
+            var mockRepositorioApplication = new Mock<IRepositorioApplication>();
+            var mockValidatorApplication = new Mock<IApplicationValidator>();
 
-        //    var retorno = await _servicoAplicacaoApplication.Insert(applicationViewModel);
+            mockRepositorioApplication.Setup(db => db.Insert(It.IsAny<ApplicationModel>())).Returns(application);
 
-        //    Assert.IsType<ApplicationViewModel>(retorno);
-        //    Assert.NotNull(retorno);
-        //    Assert.NotNull(retorno.Id);
-        //    Assert.NotEmpty(retorno.Id);
-        //    Assert.Equal(24, retorno.Id.Length);
-        //}
+            var sut = new ServicoAplicacaoApplication(mockRepositorioApplication.Object, mockValidatorApplication.Object);
+            var retorno = sut.Insert(applicationViewModel);
 
-        //[Fact]
-        //public async Task Update_ShouldReturnSavedObject()
-        //{
-        //    var applicationViewModel = _fixture.Create<ApplicationViewModel>();
-        //    var application = (ApplicationModel)applicationViewModel;
-        //    var application2 = _fixture.Create<ApplicationModel>();
+            Assert.IsType<ApplicationViewModel>(retorno);
+            Assert.NotNull(retorno.Id);
+            Assert.NotEmpty(retorno.Id);
+        }
 
-        //    _repositorioApplicationMock.Setup(p => p.Update(application.Id, application)).ReturnsAsync(application2);
+        [Fact]
+        public void Updated_ShouldReturnSavedObject()
+        {
+            var id = _fixture.Create<string>().Substring(0, 24);
+            var applicationViewModel = _fixture.Create<ApplicationViewModel>();
+            var application = _fixture.Create<ApplicationModel>();
 
-        //    var retorno = await _servicoAplicacaoApplication.Update(application.Id, applicationViewModel);
+            var mockRepositorioApplication = new Mock<IRepositorioApplication>();
+            var mockValidatorApplication = new Mock<IApplicationValidator>();
 
-        //    Assert.IsType<ApplicationViewModel>(retorno);
-        //    Assert.NotNull(retorno);
-        //    Assert.NotNull(retorno.Id);
-        //    Assert.NotEmpty(retorno.Id);
-        //    Assert.Equal(24, retorno.Id.Length);
-        //}
+            mockRepositorioApplication.Setup(db => db.Update(It.IsAny<string>(), It.IsAny<ApplicationModel>())).Returns(application);
+
+            var sut = new ServicoAplicacaoApplication(mockRepositorioApplication.Object, mockValidatorApplication.Object);
+            var retorno = sut.Update(id, applicationViewModel);
+
+            Assert.IsType<ApplicationViewModel>(retorno);
+            Assert.NotNull(retorno.Id);
+            Assert.NotEmpty(retorno.Id);
+        }
+
+        [Fact]
+        public void RemoveModel_ShouldCallRemoveMethod()
+        {
+            var applicationViewModel = _fixture.Create<ApplicationViewModel>();
+            var application = _fixture.Create<ApplicationModel>();
+
+            var mockRepositorioApplication = new Mock<IRepositorioApplication>();
+            var mockValidatorApplication = new Mock<IApplicationValidator>();
+
+            mockRepositorioApplication.Setup(db => db.Remove(It.IsAny<ApplicationModel>()));
+
+            var sut = new ServicoAplicacaoApplication(mockRepositorioApplication.Object, mockValidatorApplication.Object);
+            sut.Remove(applicationViewModel);
+
+            mockRepositorioApplication.Verify(m => m.Remove(It.IsAny<ApplicationModel>()), Times.Once());
+        }
+
+        [Fact]
+        public void RemoveById_ShouldCallRemoveMethod()
+        {
+            var id = _fixture.Create<string>().Substring(0, 24);
+            var applicationViewModel = _fixture.Create<ApplicationViewModel>();
+            var application = _fixture.Create<ApplicationModel>();
+
+            var mockRepositorioApplication = new Mock<IRepositorioApplication>();
+            var mockValidatorApplication = new Mock<IApplicationValidator>();
+
+            mockRepositorioApplication.Setup(db => db.Remove(id));
+
+            var sut = new ServicoAplicacaoApplication(mockRepositorioApplication.Object, mockValidatorApplication.Object);
+            sut.Remove(id);
+
+            mockRepositorioApplication.Verify(m => m.Remove(id), Times.Once());
+        }
     }
 }

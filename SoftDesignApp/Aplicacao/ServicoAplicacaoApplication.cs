@@ -1,11 +1,11 @@
-﻿using Dominio.Interface.Aplicacao;
+﻿using Dominio.Interface;
+using Dominio.Interface.Aplicacao;
 using Dominio.Interface.Infra.Repositorio;
 using Dominio.Model;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
 using Dominio.ViewModel;
-using Dominio.Interface;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Aplicacao
 {
@@ -34,33 +34,32 @@ namespace Aplicacao
             return (ApplicationViewModel)retorno;
         }
 
-        public async Task<ApplicationViewModel> Insert(ApplicationViewModel application)
+        public ApplicationViewModel Insert(ApplicationViewModel application)
         {
             _applicationValidator.ValidateAndThrow(application);
 
-            var aplicationModel = (ApplicationModel)application;
-            var retorno = await _repositorioApplication.Insert(aplicationModel);
+            var retorno = _repositorioApplication.Insert((ApplicationModel)application);
             return (ApplicationViewModel)retorno;
         }
 
-        public async Task<ApplicationViewModel> Update(string id, ApplicationViewModel application)
+        public ApplicationViewModel Update(string id, ApplicationViewModel application)
         {
             _applicationValidator.ValidateAndThrow(application);
 
-            var retorno = await _repositorioApplication.Update(id, (ApplicationModel)application);
+            var retorno = _repositorioApplication.Update(id, (ApplicationModel)application);
             return (ApplicationViewModel)retorno;
         }
 
-        public async Task Remove(ApplicationViewModel application)
+        public void Remove(ApplicationViewModel application)
         {
             _applicationValidator.ValidateAndThrow(application);
 
-            await _repositorioApplication.Remove((ApplicationModel)application);
+            _repositorioApplication.Remove((ApplicationModel)application);
         }
 
-        public async Task Remove(string id)
+        public void Remove(string id)
         {
-            await _repositorioApplication.Remove(id);
+            _repositorioApplication.Remove(id);
         }
     }
 }

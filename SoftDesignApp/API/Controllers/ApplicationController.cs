@@ -49,11 +49,11 @@ namespace API.Controllers
         }
 
         [HttpPost("insert")]
-        public async Task<ActionResult<ApplicationViewModel>> Insert(ApplicationViewModel model)
+        public ActionResult<ApplicationViewModel> Insert(ApplicationViewModel model)
         {
             try
             {
-                var result = await _servicoAplicacaoApplication.Insert(model);
+                var result = _servicoAplicacaoApplication.Insert(model);
 
                 return Ok(result);
             }
@@ -64,11 +64,11 @@ namespace API.Controllers
         }
 
         [HttpPatch("update/{id:length(24)}")]
-        public async Task<ActionResult<ApplicationViewModel>> Update(string id, ApplicationViewModel model)
+        public ActionResult<ApplicationViewModel> Update(string id, ApplicationViewModel model)
         {
             try
             {
-                var result = await _servicoAplicacaoApplication.Update(id, model);
+                var result = _servicoAplicacaoApplication.Update(id, model);
 
                 return Ok(result);
             }
@@ -79,11 +79,11 @@ namespace API.Controllers
         }
 
         [HttpDelete("delete")]
-        public async Task<ActionResult> Delete(ApplicationViewModel model)
+        public ActionResult Delete(ApplicationViewModel model)
         {
             try
             {
-                await _servicoAplicacaoApplication.Remove(model);
+                _servicoAplicacaoApplication.Remove(model);
 
                 return Ok();
             }
@@ -94,11 +94,11 @@ namespace API.Controllers
         }
 
         [HttpDelete("delete/{id:length(24)}")]
-        public async Task<ActionResult> Delete(string id)
+        public ActionResult Delete(string id)
         {
             try
             {
-                await _servicoAplicacaoApplication.Remove(id);
+                _servicoAplicacaoApplication.Remove(id);
 
                 return Ok();
             }

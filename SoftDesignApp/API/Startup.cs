@@ -64,6 +64,8 @@ namespace API
             services.AddScoped<IServicoAplicacaoApplication, ServicoAplicacaoApplication>();
             services.AddScoped<IRepositorioApplication, RepositorioApplication>();
             services.AddScoped<IApplicationValidator, ApplicationValidator>();
+            services.AddScoped<IRepositorioFactory, RepositorioFactory>();
+            services.AddScoped<IMongoDatabaseFactory, MongoDatabaseFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

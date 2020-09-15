@@ -51,52 +51,52 @@ namespace Test.API.Test
         }
 
         [Fact]
-        public async Task RouteInsert_ShouldReturnCorrectTypes()
+        public void RouteInsert_ShouldReturnCorrectTypes()
         {
             var application = _fixture.Create<ApplicationViewModel>();
 
             servicoAplicacaoApplication.Setup(s => s.Insert(application));
 
-            var retorno = await applicationController.Insert(application);
+            var retorno = applicationController.Insert(application);
 
             Assert.IsType<ActionResult<ApplicationViewModel>>(retorno);
             Assert.IsType<OkObjectResult>(retorno.Result);
         }
 
         [Fact]
-        public async Task RouteUpdate_ShouldReturnCorrectTypes()
+        public void RouteUpdate_ShouldReturnCorrectTypes()
         {
             var application = _fixture.Create<ApplicationViewModel>();
             var id = _fixture.Create<string>().Substring(0, 24);
 
             servicoAplicacaoApplication.Setup(s => s.Update(id, application));
 
-            var retorno = await applicationController.Update(id, application);
+            var retorno = applicationController.Update(id, application);
 
             Assert.IsType<ActionResult<ApplicationViewModel>>(retorno);
             Assert.IsType<OkObjectResult>(retorno.Result);
         }
 
         [Fact]
-        public async Task RouteDeleteModel_ShouldReturnCorrectTypes()
+        public void RouteDeleteModel_ShouldReturnCorrectTypes()
         {
             var application = _fixture.Create<ApplicationViewModel>();
 
             servicoAplicacaoApplication.Setup(s => s.Remove(application));
 
-            var retorno = await applicationController.Delete(application);
+            var retorno = applicationController.Delete(application);
 
             Assert.IsType<OkResult>(retorno);
         }
 
         [Fact]
-        public async Task RouteDeleteById_ShouldReturnCorrectTypes()
+        public void RouteDeleteById_ShouldReturnCorrectTypes()
         {
             var id = _fixture.Create<string>().Substring(0, 24);
 
             servicoAplicacaoApplication.Setup(s => s.Remove(id));
 
-            var retorno = await applicationController.Delete(id);
+            var retorno = applicationController.Delete(id);
 
             Assert.IsType<OkResult>(retorno);
         }
